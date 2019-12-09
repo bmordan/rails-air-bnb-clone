@@ -1,0 +1,13 @@
+// Place all the styles related to the properties controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.card-list-section {
+    display: grid;
+}
+.card-list-item {
+    width: 100%;
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
