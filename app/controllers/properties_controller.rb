@@ -22,12 +22,26 @@ class PropertiesController < ApplicationController
 
     def show
         property = Property.find(params[:id])
-        user = User.find(params[:user_id])
+        user = User.find(property.user_id)
+        reviews = property.bookings.reduce([]) {|memo, booking|
+            memo << booking.reviews
+                .filter {|r| r.is_host == 0}
+                .map {|review|
+                    {
+                        id: review.id,
+                        user: booking.user,
+                        user_image: url_for(booking.user.image),
+                        rating: review.rating,
+                        comment: review.comment
+                    }
+                }
+            memo.flatten!
+        }
         render component: "PropertyPage", props: {
             property: property,
             image: url_for(property.image),
-            user: user,
-            token: form_authenticity_token
+            token: form_authenticity_token,
+            reviews: reviews
         }
     end
 

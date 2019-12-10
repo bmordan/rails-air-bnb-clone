@@ -14,3 +14,10 @@ locations = ["Rome", "London", "Battersea", "Coombe Down"]
     user.properties.create({location: locations[index], price_per_night: 100})
     user.properties.first.image.attach(io: File.open("./db/images/house#{index + 1}.jpg"), filename: "house#{index + 1}.jpg", content_type: "image/jpeg")
 end
+
+bob = User.find_by({name: "Bob"})
+property = Property.find_by({location: "London"})
+booking_past = Booking.create({from: "2018-10-10", nights: 5, user_id: bob.id, property_id: property.id})
+booking_future = Booking.create({from: "2020-10-10", nights: 3, user_id: bob.id, property_id: property.id})
+review = Review.create({booking_id: booking_past.id, rating:4, comment: "Very nice", is_host:0})
+review_host = Review.create({booking_id: booking_past.id, rating:3, comment: "Bit noisy", is_host:1})

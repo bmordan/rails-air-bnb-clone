@@ -36,7 +36,24 @@ class UsersController < ApplicationController
                         image: url_for(booking.property.image),
                         nights: booking.nights
                     }
+                },
+            reviews: user.bookings
+                .filter {|b| Date.parse(b.from) < DateTime.now}
+                .reduce([]) {|memo, booking|
+                    memo << booking.reviews
+                        .filter {|r| r.is_host == 1}
+                        .map {|review|
+                            {
+                                id: review.id,
+                                user: booking.property.user,
+                                user_image: url_for(booking.property.user.image),
+                                rating: review.rating,
+                                comment: review.comment
+                            }
+                        }
+                    memo.flatten!
                 }
+
         }, prerender: false
     end
 
