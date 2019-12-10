@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     def create
         user = User.create(user_params)
         user.image.attach(params[:image])
+        session[:user_id] = user.id
         render component: "UserPage", props: {token: form_authenticity_token, user: user}, prerender: false
     end
 
@@ -52,7 +53,8 @@ class UsersController < ApplicationController
                             }
                         }
                     memo.flatten!
-                }
+                },
+            current_user: current_user
 
         }, prerender: false
     end

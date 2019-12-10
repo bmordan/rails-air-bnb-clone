@@ -1,0 +1,5 @@
+<%=form_with scope: :sessions, url: "/login", local: true do |h|%>
+    <%=h.text_field :name, placeholder: "username"%>
+    <%=h.password_field :password, placeholder: "password"%>
+    <%=h.submit "Login"%>
+<%end%>

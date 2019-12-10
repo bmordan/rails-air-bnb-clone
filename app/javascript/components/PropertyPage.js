@@ -9,14 +9,14 @@ export default function (props) {
                 <h2 className="ph4 pv2">{props.property.location} £{props.property.price_per_night} <small>a night</small></h2>
             </section>
             <section className="ph4 pv2 bb b--light-silver">
-                {props.user ? (
+                {props.current_user ? (
                     <form 
-                    action={`/users/${props.user.id}/properties/${props.property.id}/bookings`} 
+                    action={`/users/${props.current_user.id}/properties/${props.property.id}/bookings`} 
                     method="POST"
                     className="pa2 tc">
                         <h3>Book your stay</h3>
                         <input name="authenticity_token" value={props.token} type="hidden" />
-                        <input name="user_id" value={props.user.id} type="hidden" />
+                        <input name="user_id" value={props.current_user.id} type="hidden" />
                         <div>
                             <label>For&nbsp;</label>
                             <input className="pa2" name="nights" type="number" min="1" max="7" placeholder="?" />

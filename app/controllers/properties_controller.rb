@@ -11,7 +11,7 @@ class PropertiesController < ApplicationController
                 image: url_for(property.image)
             }
         }
-        render component: "Properties", props: {properties: properties}
+        render component: "Properties", props: {properties: properties, current_user: current_user}
     end
 
     def create
@@ -22,7 +22,6 @@ class PropertiesController < ApplicationController
 
     def show
         property = Property.find(params[:id])
-        user = User.find(property.user_id)
         reviews = property.bookings.reduce([]) {|memo, booking|
             memo << booking.reviews
                 .filter {|r| r.is_host == 0}
@@ -41,7 +40,8 @@ class PropertiesController < ApplicationController
             property: property,
             image: url_for(property.image),
             token: form_authenticity_token,
-            reviews: reviews
+            reviews: reviews,
+            current_user: current_user
         }
     end
 

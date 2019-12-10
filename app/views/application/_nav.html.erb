@@ -6,7 +6,7 @@
     </div>
     <div className="flex-none">
         <%if current_user%>
-            <a class="link db f6" href="/logout">Logout</a>
+            <a class="link db f6" href="/logout">Logout <%=current_user.name%></a>
         <%else%>
             <a class="link db f6" href="/login">Login</a>
         <%end%>
