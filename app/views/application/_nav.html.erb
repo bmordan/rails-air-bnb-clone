@@ -1,0 +1,14 @@
+<nav class="w-100 bg-light-pink pv1 ph2 flex items-center justify-end fixed">
+    <div class="link db flex-auto">
+        <a class="link db flex-none" href="/">
+            <%=image_tag "logo.svg",  width: "70px"%>
+        </a>
+    </div>
+    <div className="flex-none">
+        <%if current_user%>
+            <a class="link db f6" href="/logout">Logout</a>
+        <%else%>
+            <a class="link db f6" href="/login">Login</a>
+        <%end%>
+    </div>
+</nav>

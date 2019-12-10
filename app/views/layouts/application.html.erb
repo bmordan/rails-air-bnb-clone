@@ -11,9 +11,7 @@
   </head>
 
   <body>
-    <nav>
-      <a href="/">Home</a>
-    </nav>
-    <%= yield %>
+    <%= render partial: 'nav', locals: {user: current_user}%>
+    <div class="pt4"><%= yield %></div>
   </body>
 </html>

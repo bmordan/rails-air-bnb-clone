@@ -26,17 +26,17 @@ class UsersController < ApplicationController
                 }
             }, 
             bookings: user.bookings
-            .filter {|b| Date.parse(b.from) > DateTime.now}
-            .map {|booking|
-                {
-                    id: booking.id,
-                    from: Date.parse(booking.from).strftime("%a %-d %b"),
-                    location: booking.property.location,
-                    property_id: booking.property.id,
-                    image: url_for(booking.property.image),
-                    nights: booking.nights
+                .filter {|b| Date.parse(b.from) > DateTime.now}
+                .map {|booking|
+                    {
+                        id: booking.id,
+                        from: Date.parse(booking.from).strftime("%a %-d %b"),
+                        location: booking.property.location,
+                        property_id: booking.property.id,
+                        image: url_for(booking.property.image),
+                        nights: booking.nights
+                    }
                 }
-            }
         }, prerender: false
     end
 
