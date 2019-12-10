@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :properties, only: [:index, :show]
 
   resources :users do
-    resources :properties
+    resources :properties do
+      resources :bookings
+    end
   end
 end

@@ -22,7 +22,7 @@ class PropertiesController < ApplicationController
 
     def show
         property = Property.find(params[:id])
-        user = User.find(property.user_id)
+        user = User.find(params[:user_id])
         render component: "PropertyPage", props: {
             property: property,
             image: url_for(property.image),
